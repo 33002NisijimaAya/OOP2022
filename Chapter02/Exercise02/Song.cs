@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Exercise {
-    class Program {
-        static void Main(string[] args) {
-
-        }
+namespace Exercise02 {
+    class Song {
+        
     }
 }
