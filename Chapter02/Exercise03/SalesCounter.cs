@@ -14,6 +14,7 @@ namespace Exercise03 {
             _sales = ReadSales(filePath);
         }
 
+        //カテゴリー別の売り上げを求める
         public IDictionary<string, int> GetPerCategorySales() {
             var dict = new Dictionary<string, int>();
             foreach (Sale sale in _sales) {
@@ -25,6 +26,7 @@ namespace Exercise03 {
             return dict;
         }
 
+        //店舗別の売り上げを求める
         public IDictionary<string, int> GetPerStoreSales() {
             var dict = new Dictionary<string, int>();
             foreach (Sale sale in _sales) {
