@@ -17,7 +17,7 @@ namespace Exercise03 {
                 Console.Write(">");
 
                 select = int.Parse(Console.ReadLine());
-                IDictionary<string, int> amountPerStore = null;
+                //IDictionary<string, int> amountPerStore = null;
 
                 switch (select) {
                     case 1:
