@@ -11,8 +11,9 @@ namespace Section01 {
                "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
 
-            var names = list.FindAll(s => s.Length <= 5);
-            names.ForEach(s => Console.WriteLine(s));
+            var lowerList = list.ConvertAll(s => s.ToLower());
+            lowerList.ForEach(s => Console.WriteLine(s));
+            //list.ForEach(s => Console.WriteLine(s));
 
             //foreach (var s in names) {
             //    Console.WriteLine(s);
