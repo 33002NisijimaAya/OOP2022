@@ -12,7 +12,7 @@ namespace Exercise02 {
                "Tokyo", "New Delhi", "Bangkok", "London", "Paris", "Berlin", "Canberra", "Hong Kong",
             };
 
-            Exercise2_1(names);
+            //Exercise2_1(names);
             Console.WriteLine("--------------");
 
             Exercise2_2(names);
@@ -39,7 +39,8 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_2(List<string> names) {
-            
+            var count = names.Count(s => s.Contains("o"));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<string> names) {
