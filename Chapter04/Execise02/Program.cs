@@ -13,8 +13,8 @@ namespace Exercise02 {
                 new YearMonth(2002, 12),
                 new YearMonth(1998, 5),
                 new YearMonth(2001, 8),
-                new YearMonth(1654, 9),
-                new YearMonth(2002, 7),//最後のカンマはつけておくp103
+                new YearMonth(1900, 9),
+                new YearMonth(2020, 7),//最後のカンマはつけておくp103
             };
 
             //4.2.2
@@ -40,11 +40,12 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_6(YearMonth[] ymCollection) {
-            foreach (var ym in ymCollection.OrderByDescending(ym => ym.Year)) {
+            foreach (var ym in ymCollection.Where(ym=>DateTime.IsLeapYear(ym.Year))) {
                 Console.WriteLine(ym);
             }
-            
 
+            var data = ymCollection.Max(ym => ym.Month);
+            Console.WriteLine(data);
         }
 
 
