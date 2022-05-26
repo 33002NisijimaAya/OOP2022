@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 namespace Exercise02 {
     class Program {
         static void Main(string[] args) {
-            var inputNumber = Console.ReadLine();
-            int.TryParse(inputNumber,out int.Format("{0:N0}", inputNumber); 
+            var inputString = Console.ReadLine();
+            int num = 0;
+            if (int.TryParse(inputString, out num)){
+                Console.WriteLine(num.ToString("#,0"));
+            }
         }
     }
 }
