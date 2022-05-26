@@ -11,6 +11,8 @@ namespace Exercise02 {
             int num = 0;
             if (int.TryParse(inputString, out num)){
                 Console.WriteLine(num.ToString("#,0"));
+            } else {
+                Console.WriteLine("変換できませんでした。");
             }
         }
     }
