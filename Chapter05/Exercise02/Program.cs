@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 namespace Exercise02 {
     class Program {
         static void Main(string[] args) {
-            var inputString = Console.ReadLine();
-            int num = 0;
-            if (int.TryParse(inputString, out num)){
-                Console.WriteLine(num.ToString("#,0"));
+            var line = Console.ReadLine();
+            int num = 0;//整数値を入れる変数を用意
+            //p126
+            if (int.TryParse(line, out num)){
+                Console.WriteLine("{0:#,#}",num);//整数への変換成功
             } else {
-                Console.WriteLine("変換できませんでした。");
+                Console.WriteLine("数値文字列ではありません");//変換失敗
             }
         }
     }
