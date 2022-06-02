@@ -40,31 +40,45 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            throw new NotImplementedException();
+            var book = books.FirstOrDefault(x => x.Title == "ワンダフル・C#ライフ");
+            Console.WriteLine("{0},{1}",book.Price,book.Pages);
+            
         }
+            
 
         private static void Exercise2_2(List<Book> books) {
-            throw new NotImplementedException();
+            var count = books.Count(x => x.Title.Contains("C#"));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<Book> books) {
-            throw new NotImplementedException();
+            var avg = books.Where(x => x.Title.Contains("C#")).Average(x=>x.Pages);
+            Console.WriteLine(avg);
         }
 
         private static void Exercise2_4(List<Book> books) {
-            throw new NotImplementedException();
+            var book = books.FirstOrDefault(x => x.Price >= 4000);
+            Console.WriteLine(book.Title);
         }
 
         private static void Exercise2_5(List<Book> books) {
-            throw new NotImplementedException();
+            var maxpage = books.Where(x => x.Price < 4000).Max(x=>x.Pages);
+            Console.WriteLine(maxpage);
         }
 
         private static void Exercise2_6(List<Book> books) {
-            throw new NotImplementedException();
+            var book = books.Where(x => x.Pages >= 400).OrderByDescending(x => x.Price);
+            foreach (var price in book) {
+                Console.WriteLine("{0},{1}", price.Title, price.Price);
+            }
+            
         }
 
         private static void Exercise2_7(List<Book> books) {
-            throw new NotImplementedException();
+            var book = books.Where(x => x.Title.Contains("C#") && x.Pages <= 500);
+            foreach (var title in book){
+                Console.WriteLine(title.Title);
+            }
         }
     }
 }       
