@@ -45,15 +45,14 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(int[] numbers) {
-            var sortednumber = numbers.OrderBy(n => n).Where(n=>n>0).Take(3);
-            foreach (var num in sortednumber) {
+            foreach (var num in numbers.OrderBy(n => n).Take(3)) {
                 Console.WriteLine(num);
             }
         }
 
         private static void Exercise1_5(int[] numbers) {
-            var results = numbers.Distinct().Count(n=>n>10);
-            Console.WriteLine(results);  
+            var count = numbers.Distinct().Count(n=>n>10);
+            Console.WriteLine(count);  
         }
     }
 }
