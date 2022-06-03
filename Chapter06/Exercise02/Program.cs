@@ -33,10 +33,18 @@ namespace Exercise02 {
             Console.WriteLine("-----");
 
             Exercise2_6(books);
-
             Console.WriteLine("-----");
 
             Exercise2_7(books);
+            Console.WriteLine("-----");
+
+            Exercise2_8(books);
+        }
+
+        private static void Exercise2_8(List<Book> books) {
+            foreach (var item in books.Select((b,i)=>new { i, b.Title })) {
+                Console.WriteLine((item.i + 1) + "冊目：" + item.Title);
+            }
         }
 
         private static void Exercise2_1(List<Book> books) {
@@ -58,7 +66,8 @@ namespace Exercise02 {
 
         private static void Exercise2_4(List<Book> books) {
             var book = books.FirstOrDefault(x => x.Price >= 4000);
-            Console.WriteLine(book.Title);
+            if(book != null)
+                Console.WriteLine(book.Title);
         }
 
         private static void Exercise2_5(List<Book> books) {
@@ -82,8 +91,8 @@ namespace Exercise02 {
         }
     }
 }       
-        class Book {
-            public string Title { get; set; }
-            public int Price { get; set; }
-            public int Pages { get; set; }
-        }
+class Book {
+    public string Title { get; set; }
+    public int Price { get; set; }
+    public int Pages { get; set; }
+}
