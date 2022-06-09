@@ -24,128 +24,114 @@ namespace Sample0607 {
         /// コード エディターで変更しないでください。
         /// </summary>
         private void InitializeComponent() {
+            this.btRandom = new System.Windows.Forms.Button();
+            this.Number = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.NupNum1 = new System.Windows.Forms.NumericUpDown();
-            this.NupNum2 = new System.Windows.Forms.NumericUpDown();
-            this.nupAns = new System.Windows.Forms.NumericUpDown();
-            this.nupMod = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.NupNum1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NupNum2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupAns)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupMod)).BeginInit();
+            this.min = new System.Windows.Forms.NumericUpDown();
+            this.max = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.Number)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.min)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.max)).BeginInit();
             this.SuspendLayout();
+            // 
+            // btRandom
+            // 
+            this.btRandom.BackColor = System.Drawing.Color.White;
+            this.btRandom.Location = new System.Drawing.Point(357, 118);
+            this.btRandom.Name = "btRandom";
+            this.btRandom.Size = new System.Drawing.Size(169, 56);
+            this.btRandom.TabIndex = 0;
+            this.btRandom.Text = "乱数取得";
+            this.btRandom.UseMnemonic = false;
+            this.btRandom.UseVisualStyleBackColor = false;
+            this.btRandom.Click += new System.EventHandler(this.btRandom_Click);
+            // 
+            // Number
+            // 
+            this.Number.Font = new System.Drawing.Font("MS UI Gothic", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.Number.Location = new System.Drawing.Point(47, 103);
+            this.Number.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.Number.Name = "Number";
+            this.Number.Size = new System.Drawing.Size(193, 71);
+            this.Number.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label1.Location = new System.Drawing.Point(146, 63);
+            this.label1.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label1.Location = new System.Drawing.Point(119, 242);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 37);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "÷";
+            this.label1.Size = new System.Drawing.Size(73, 21);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "最小値";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label2.Location = new System.Drawing.Point(333, 63);
+            this.label2.Font = new System.Drawing.Font("MS UI Gothic", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.label2.Location = new System.Drawing.Point(119, 292);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 37);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "＝";
+            this.label2.Size = new System.Drawing.Size(73, 21);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "最大値";
             // 
-            // label3
+            // min
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.label3.Location = new System.Drawing.Point(499, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 37);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "あまり";
+            this.min.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.min.Location = new System.Drawing.Point(238, 228);
+            this.min.Name = "min";
+            this.min.Size = new System.Drawing.Size(193, 42);
+            this.min.TabIndex = 1;
             // 
-            // button1
+            // max
             // 
-            this.button1.Font = new System.Drawing.Font("MS UI Gothic", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.button1.Location = new System.Drawing.Point(650, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(123, 53);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "計算";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // NupNum1
-            // 
-            this.NupNum1.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.NupNum1.Location = new System.Drawing.Point(20, 63);
-            this.NupNum1.Name = "NupNum1";
-            this.NupNum1.Size = new System.Drawing.Size(120, 44);
-            this.NupNum1.TabIndex = 3;
-            // 
-            // NupNum2
-            // 
-            this.NupNum2.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.NupNum2.Location = new System.Drawing.Point(207, 61);
-            this.NupNum2.Name = "NupNum2";
-            this.NupNum2.Size = new System.Drawing.Size(120, 44);
-            this.NupNum2.TabIndex = 4;
-            // 
-            // nupAns
-            // 
-            this.nupAns.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.nupAns.Location = new System.Drawing.Point(373, 61);
-            this.nupAns.Name = "nupAns";
-            this.nupAns.Size = new System.Drawing.Size(120, 44);
-            this.nupAns.TabIndex = 4;
-            // 
-            // nupMod
-            // 
-            this.nupMod.Font = new System.Drawing.Font("MS UI Gothic", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.nupMod.Location = new System.Drawing.Point(603, 61);
-            this.nupMod.Name = "nupMod";
-            this.nupMod.Size = new System.Drawing.Size(120, 44);
-            this.nupMod.TabIndex = 4;
+            this.max.Font = new System.Drawing.Font("MS UI Gothic", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.max.Location = new System.Drawing.Point(238, 278);
+            this.max.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.max.Name = "max";
+            this.max.Size = new System.Drawing.Size(193, 42);
+            this.max.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 245);
-            this.Controls.Add(this.nupAns);
-            this.Controls.Add(this.nupMod);
-            this.Controls.Add(this.NupNum2);
-            this.Controls.Add(this.NupNum1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(699, 526);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Controls.Add(this.max);
+            this.Controls.Add(this.min);
+            this.Controls.Add(this.Number);
+            this.Controls.Add(this.btRandom);
             this.MaximizeBox = false;
             this.Name = "Form1";
-            this.Text = "計算アプリ";
-            ((System.ComponentModel.ISupportInitialize)(this.NupNum1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NupNum2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupAns)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nupMod)).EndInit();
+            this.Text = "nyu";
+            ((System.ComponentModel.ISupportInitialize)(this.Number)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.min)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.max)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btRandom;
+        private System.Windows.Forms.NumericUpDown Number;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.NumericUpDown NupNum1;
-        private System.Windows.Forms.NumericUpDown NupNum2;
-        private System.Windows.Forms.NumericUpDown nupAns;
-        private System.Windows.Forms.NumericUpDown nupMod;
+        private System.Windows.Forms.NumericUpDown min;
+        private System.Windows.Forms.NumericUpDown max;
     }
 }
 

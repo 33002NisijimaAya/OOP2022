@@ -14,20 +14,10 @@ namespace Sample0607 {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e) {
-            if(NupNum2.Value != 0) {
-                nupAns.Value = NupNum1.Value/NupNum2.Value;
-                nupMod.Value = NupNum1.Value % NupNum2.Value;
-            }
-            else {
-                MessageBox.Show("０で割り算できません！",
-                "エラー",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error);
-            }
-
+        private void btRandom_Click(object sender, EventArgs e) {
+            var rand = new Random();//乱数オブジェクト生成
+            
+            Number.Value = rand.Next(minValue:(int)min.Value,maxValue:(int)max.Value+1);
         }
-
-        
     }
 }
