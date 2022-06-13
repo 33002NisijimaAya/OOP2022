@@ -77,7 +77,7 @@ namespace AddressBook {
             tbAddress.Text = listPerson[index].Address;
             tbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
-            clear();
+            groupCheckBoxAllclear();
 
             foreach (var group in listPerson[index].listGroup) {
                 switch (group) {
@@ -98,11 +98,9 @@ namespace AddressBook {
                 }
             }
         }
-        private void clear() {
-            cbFamily.Checked = false;
-            cbFriend.Checked = false;
-            cbWork.Checked = false;
-            cbOther.Checked = false;
+
+        private void groupCheckBoxAllclear() {
+            cbFamily.Checked = cbFriend.Checked = cbWork.Checked = cbOther.Checked = false;
         }
     }
 }
