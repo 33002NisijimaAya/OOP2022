@@ -12,6 +12,7 @@ namespace AddressBook {
     public partial class Form1 : Form {
         //住所データ管理用リスト
         BindingList<Person> listPerson = new BindingList<Person>();
+        int count = 0;
 
         public Form1() {
             InitializeComponent();
@@ -25,16 +26,24 @@ namespace AddressBook {
         }
 
         private void btAddPerson_Click(object sender, EventArgs e) {
-            Person newPerson = new Person {
-                Name = tbName.Text,
-                MailAddress = tbMailAddress.Text,
-                Address = tbAddress.Text,
-                Company = tbCompany.Text,
-                Picture = pbPicture.Image,
-                listGroup = GetCheckBoxGroup(),
-            };
-
-            listPerson.Add(newPerson);
+            if (tbName.Text == "") {
+                MessageBox.Show("名前を入力してください");
+            }
+            else {
+                btDelete.Enabled = true;
+                btUpdate.Enabled = true;
+                Person newPerson = new Person {
+                    Name = tbName.Text,
+                    MailAddress = tbMailAddress.Text,
+                    Address = tbAddress.Text,
+                    Company = tbCompany.Text,
+                    Picture = pbPicture.Image,
+                    listGroup = GetCheckBoxGroup(),
+                };
+                count++;
+                listPerson.Add(newPerson);
+                dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
+            }
         }
 
         //チェックボックスにセットされている値をリストとして取り出す
@@ -108,22 +117,29 @@ namespace AddressBook {
 
         //更新ボタンが押された時の処理
         private void btUpdate_Click(object sender, EventArgs e) {
+                listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
+                listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
+                listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
+                listPerson[dgvPersons.CurrentRow.Index].Company = tbCompany.Text;
+                listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
 
-            listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
-            listPerson[dgvPersons.CurrentRow.Index].MailAddress= tbMailAddress.Text;
-            listPerson[dgvPersons.CurrentRow.Index].Address=tbAddress.Text;
-            listPerson[dgvPersons.CurrentRow.Index].Company=tbCompany.Text;
-            listPerson[dgvPersons.CurrentRow.Index].Picture=pbPicture.Image;
+                dgvPersons.Refresh();
 
-            dgvPersons.Refresh();
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            //btDelete.Enabled = false; 　//削除ボタンをマスク
+            btDelete.Enabled = false; 　//削除ボタンをマスク
+            btUpdate.Enabled = false;   //更新ボタンをマスク
         }
 
+        //削除ボタンが押された時の処理
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
+            if (listPerson.Count() == 0) {
+                btDelete.Enabled = false;
+                btUpdate.Enabled = false;
+            }
+            
         }
     }
 }
