@@ -17,10 +17,12 @@ namespace SalesCalculator {
         public IDictionary<string,int> GetPerStoreSales() {
             var dict = new Dictionary<string, int>();
             foreach (Sale sale in _sales) {
-                if (dict.ContainsKey(sale.ShopName))
+                if (dict.ContainsKey(sale.ShopName)) {
                     dict[sale.ShopName] += sale.Amount;
-                else
+                }
+                else {
                     dict[sale.ShopName] = sale.Amount;
+                }
             }
             return dict;
         }
