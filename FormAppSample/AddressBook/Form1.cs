@@ -34,8 +34,6 @@ namespace AddressBook {
                 return;
             }
 
-            btDelete.Enabled = true;
-            btUpdate.Enabled = true;
             Person newPerson = new Person {
                 Name = tbName.Text,
                 MailAddress = tbMailAddress.Text,
@@ -47,11 +45,11 @@ namespace AddressBook {
 
             listPerson.Add(newPerson);
             dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
-
-            if (listPerson.Count() > 0) {
-                btDelete.Enabled = false;
-                btUpdate.Enabled = false;
-            }
+            EnabledCheck();
+            //if (listPerson.Count() > 0) {
+            //    btDelete.Enabled = true;
+            //    btUpdate.Enabled = true;
+            //}
 
             setcbCompany(cbCompany.Text);
         }
@@ -60,7 +58,7 @@ namespace AddressBook {
         private void setcbCompany(string Company) {
             if (!cbCompany.Items.Contains(Company)) {
                 //まだ登録されていなければ登録処理
-                cbCompany.Items.Add(cbCompany.Text);
+                cbCompany.Items.Add(Company);
             }
         }
 
@@ -135,30 +133,31 @@ namespace AddressBook {
 
         //更新ボタンが押された時の処理
         private void btUpdate_Click(object sender, EventArgs e) {
-                listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
-                listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
-                listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
-                listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
-                listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+            listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
+            listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
 
-                dgvPersons.Refresh();
+            dgvPersons.Refresh();
 
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            btDelete.Enabled = false; 　//削除ボタンをマスク
-            btUpdate.Enabled = false;   //更新ボタンをマスク
+            EnabledCheck();
         }
 
         //削除ボタンが押された時の処理
         private void btDelete_Click(object sender, EventArgs e) {
             listPerson.RemoveAt(dgvPersons.CurrentRow.Index);
-            if (listPerson.Count() == 0) {
-                btDelete.Enabled = false;
-                btUpdate.Enabled = false;
-            }
+            EnabledCheck();//マスク処理呼び出し
         }
 
+
+        //更新・削除ボタンのマスク処理を行う（マスク判定含む）
+        private void EnabledCheck() {
+            btDelete.Enabled = btUpdate.Enabled = listPerson.Count() > 0 ? true : false;
+        }
 
         //保存ボタンのイベントハンドラ
         private void btSave_Click(object sender, EventArgs e) {
@@ -191,11 +190,13 @@ namespace AddressBook {
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
-
+                cbCompany.Items.Clear();
+                //コンボボックスへ登録
                 foreach (var item in listPerson.Select(p => p.Company)) {
                     setcbCompany(item);//存在する会社を登録
                 }
             }
+            EnabledCheck();
         }
     }
 }
