@@ -39,6 +39,7 @@ namespace AddressBook {
                 MailAddress = tbMailAddress.Text,
                 Address = tbAddress.Text,
                 Company = cbCompany.Text,
+                Registration = dtpRegistDate.Value,
                 Picture = pbPicture.Image,
                 listGroup = GetCheckBoxGroup(),
             };
@@ -102,6 +103,8 @@ namespace AddressBook {
             tbName.Text = listPerson[index].Name;
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
+            dtpRegistDate.Value = listPerson[index].Registration.Year > 1900 ?
+            listPerson[index].Registration : DateTime.Today;
             cbCompany.Text = listPerson[index].Company;
             pbPicture.Image = listPerson[index].Picture;
 
@@ -136,6 +139,7 @@ namespace AddressBook {
             listPerson[dgvPersons.CurrentRow.Index].Name = tbName.Text;
             listPerson[dgvPersons.CurrentRow.Index].MailAddress = tbMailAddress.Text;
             listPerson[dgvPersons.CurrentRow.Index].Address = tbAddress.Text;
+            listPerson[dgvPersons.CurrentRow.Index].Registration = dtpRegistDate.Value;
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
 
@@ -190,7 +194,7 @@ namespace AddressBook {
                 } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
                 }
-                cbCompany.Items.Clear();
+                cbCompany.Items.Clear();//コンボボックスのアイテム消去
                 //コンボボックスへ登録
                 foreach (var item in listPerson.Select(p => p.Company)) {
                     setcbCompany(item);//存在する会社を登録
