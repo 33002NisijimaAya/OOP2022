@@ -41,7 +41,9 @@ namespace AddressBook {
                 Company = cbCompany.Text,
                 Registration = dtpRegistDate.Value,
                 Picture = pbPicture.Image,
+                TelNumber = tbTelNumber.Text,
                 listGroup = GetCheckBoxGroup(),
+                KindNumber = GetRadioButtonKindNumber(),
             };
 
             listPerson.Add(newPerson);
@@ -63,7 +65,20 @@ namespace AddressBook {
             }
         }
 
+        private Person.KindNumberType GetRadioButtonKindNumber() {
+            //デフォルトの戻りを設定
+            Person.KindNumberType selectedKindNumber = Person.KindNumberType.その他;
+            if (rbHome.Checked) {//自宅にチェックがついてる
+                selectedKindNumber =  Person.KindNumberType.自宅;
+            }
+            if(rbMobile.Checked){//携帯にチェックがついている
+                selectedKindNumber = Person.KindNumberType.携帯;
+            }
+            return selectedKindNumber;
+        }
+
         //チェックボックスにセットされている値をリストとして取り出す
+
         private List<Person.GroupType> GetCheckBoxGroup() {
             var listGroup = new List<Person.GroupType>();
             if(cbFamily.Checked) {
@@ -88,7 +103,7 @@ namespace AddressBook {
 
         //データグリッドビューをクリックしたときのイベントハンドラ
         private void dgvPersons_Click(object sender, EventArgs e) {
-            
+
             //例
             //データグリッドビューのインデックス０番の名前をテキストボックスに格納
             //tb.Name.Text = listPerson[0].Name
@@ -97,24 +112,46 @@ namespace AddressBook {
             if (dgvPersons.CurrentRow == null) return;
 
             int index = dgvPersons.CurrentRow.Index;
-            
+
             //インデックスが取得出来たら、リスト（listPerson）の該当するインデックスに
             //アクセスし、リストの各項目を各テキストボックスへ表示する
             tbName.Text = listPerson[index].Name;
             tbMailAddress.Text = listPerson[index].MailAddress;
             tbAddress.Text = listPerson[index].Address;
-            dtpRegistDate.Value = listPerson[index].Registration.Year > 1900 ?
-            listPerson[index].Registration : DateTime.Today;
+            dtpRegistDate.Value = listPerson[index].Registration.Year > 1900 ? listPerson[index].Registration : DateTime.Today;
             cbCompany.Text = listPerson[index].Company;
+            tbTelNumber.Text = listPerson[index].TelNumber;
             pbPicture.Image = listPerson[index].Picture;
 
+            setGroupType(index);//グループを設定
+
+            setKindNumberType(index);//番号種別を設定
+        }
+
+        private void setKindNumberType(int index) {
+            //番号種別チェック法
+            switch (listPerson[index].KindNumber) {
+                case Person.KindNumberType.自宅:
+                    rbHome.Checked = true;
+                    break;
+                case Person.KindNumberType.携帯:
+                    rbMobile.Checked = true;
+                    break;
+                case Person.KindNumberType.その他:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void setGroupType(int index) {
             groupCheckBoxAllclear();//グループチェックボックスを一旦初期化
 
             foreach (var group in listPerson[index].listGroup) {
                 switch (group) {
                     case Person.GroupType.家族:
                         cbFamily.Checked = true;
-                    break;
+                        break;
                     case Person.GroupType.友人:
                         cbFriend.Checked = true;
                         break;
@@ -142,8 +179,9 @@ namespace AddressBook {
             listPerson[dgvPersons.CurrentRow.Index].Registration = dtpRegistDate.Value;
             listPerson[dgvPersons.CurrentRow.Index].Company = cbCompany.Text;
             listPerson[dgvPersons.CurrentRow.Index].Picture = pbPicture.Image;
+            listPerson[dgvPersons.CurrentRow.Index].KindNumber = GetRadioButtonKindNumber();
 
-            dgvPersons.Refresh();
+            dgvPersons.Refresh();//データグリッドビュー更新
 
         }
 
