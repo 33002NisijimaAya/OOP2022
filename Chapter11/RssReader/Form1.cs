@@ -37,6 +37,8 @@ namespace RssReader {
 
         private void lbRssTitle_Click(object sender, EventArgs e) {
             int index = lbRssTitle.SelectedIndex;   //選択した箇所のインデックスを取得（0～）
+            if (index == -1) return;
+
             var url = xLink.ElementAt(index);
             //wbBrowser.Url = new Uri(url);
             wvBrowser.Source = new Uri(url);
@@ -52,11 +54,15 @@ namespace RssReader {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            btBack.Enabled = wvBrowser.CanGoBack;
-            btForward.Enabled = wvBrowser.CanGoForward;
+            BackForwardButtonMaskCheck();
         }
 
         private void wvBrowser_NavigationCompleted(object sender, Microsoft.Toolkit.Win32.UI.Controls.Interop.WinRT.WebViewControlNavigationCompletedEventArgs e) {
+            BackForwardButtonMaskCheck();
+        }
+
+        private void BackForwardButtonMaskCheck() {
+            //進む・戻るボタンのマスク設定
             btBack.Enabled = wvBrowser.CanGoBack;
             btForward.Enabled = wvBrowser.CanGoForward;
         }
