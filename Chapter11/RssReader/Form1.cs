@@ -23,7 +23,6 @@ namespace RssReader {
             using (var wc = new WebClient()) {
                 var stream = wc.OpenRead(cbRssUrl.Text);
                 var xdoc = XDocument.Load(stream);
-                var tlist = new List<string>();
                 xTitle = xdoc.Root.Descendants("item").Select(x => (string)x.Element("title"));
                 xLink = xdoc.Root.Descendants("item").Select(x => (string)x.Element("link"));
                 foreach (var data in xTitle) {
