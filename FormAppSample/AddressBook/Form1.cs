@@ -48,6 +48,7 @@ namespace AddressBook {
 
             listPerson.Add(newPerson);
             dgvPersons.Rows[dgvPersons.RowCount - 1].Selected = true;
+
             EnabledCheck();
             //if (listPerson.Count() > 0) {
             //    btDelete.Enabled = true;

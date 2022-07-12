@@ -81,6 +81,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise01", "Chapter12\Exe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exercise02", "Chapter12\Exercise02\Exercise02.csproj", "{670FC898-BAB7-493D-A7D7-0CF2F8C6DEDC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CarReportSystem", "CarReportSystem", "{5D47225A-2829-4F8D-BD15-37021B3E39FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarReportSystem", "CarReportSystem\CarReportSystem\CarReportSystem.csproj", "{9253D131-8AC6-4A13-B528-AAA8193F3004}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -207,6 +211,10 @@ Global
 		{670FC898-BAB7-493D-A7D7-0CF2F8C6DEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{670FC898-BAB7-493D-A7D7-0CF2F8C6DEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{670FC898-BAB7-493D-A7D7-0CF2F8C6DEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9253D131-8AC6-4A13-B528-AAA8193F3004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9253D131-8AC6-4A13-B528-AAA8193F3004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9253D131-8AC6-4A13-B528-AAA8193F3004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9253D131-8AC6-4A13-B528-AAA8193F3004}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -242,6 +250,7 @@ Global
 		{F081FB93-8112-4F11-971D-29A39D242091} = {F6F111FB-88EE-4CDD-9BFC-ADFED7AB9373}
 		{90BD8816-8081-4C25-8AF5-C47917FE573E} = {F6F111FB-88EE-4CDD-9BFC-ADFED7AB9373}
 		{670FC898-BAB7-493D-A7D7-0CF2F8C6DEDC} = {F6F111FB-88EE-4CDD-9BFC-ADFED7AB9373}
+		{9253D131-8AC6-4A13-B528-AAA8193F3004} = {5D47225A-2829-4F8D-BD15-37021B3E39FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {294394A0-9597-43FB-862D-69D5756BFAE6}
