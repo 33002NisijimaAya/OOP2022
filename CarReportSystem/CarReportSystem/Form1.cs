@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
+        int mode = 0;
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         public Form1() {
@@ -30,8 +33,8 @@ namespace CarReportSystem {
         }
 
         private void btAddCarReport_Click(object sender, EventArgs e) {
-            if (String.IsNullOrWhiteSpace(cbCarName.Text)) {
-                MessageBox.Show("車名が入力されていません");
+            if (String.IsNullOrWhiteSpace(cbRecorder.Text)) {
+                MessageBox.Show("記録者名が入力されていません");
                 return;
             }
 
@@ -62,10 +65,10 @@ namespace CarReportSystem {
         }
 
         //車名のコンボボックスに車名を登録する（重複なし）
-        private void setcbCarName(string CarName) {
-            if (!cbCarName.Items.Contains(CarName)) {
+        private void setcbCarName(string Carname) {
+            if (!cbCarName.Items.Contains(Carname)) {
                 //まだ登録されていなければ登録処理
-                cbCarName.Items.Add(CarName);
+                cbCarName.Items.Add(Carname);
             }
         }
 
@@ -141,5 +144,78 @@ namespace CarReportSystem {
             }
         }
 
+        private void btCurrect_Click(object sender, EventArgs e) {
+            listCarReports[dgvArticles.CurrentRow.Index].Date = dtpDateTime.Value;
+            listCarReports[dgvArticles.CurrentRow.Index].Auther = cbRecorder.Text;
+            listCarReports[dgvArticles.CurrentRow.Index].Maker = GetRadioButtonMakeGroup();
+            listCarReports[dgvArticles.CurrentRow.Index].CarName = cbCarName.Text;
+            listCarReports[dgvArticles.CurrentRow.Index].Report = tbReport.Text;
+            listCarReports[dgvArticles.CurrentRow.Index].Picture = pbCarPicture.Image;
+            dgvArticles.Refresh();//データグリッドビュー更新
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            EnabledCheck();
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            listCarReports.RemoveAt(dgvArticles.CurrentRow.Index);
+            EnabledCheck();//マスク処理呼び出し
+        }
+
+        private void btSave_Click(object sender, EventArgs e) {
+            if (sfdSaveDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式でシリアル化
+                    var bf = new BinaryFormatter();
+
+                    using (FileStream fs = File.Open(sfdSaveDialog.FileName, FileMode.Create)) {
+                        bf.Serialize(fs, listCarReports);
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
+        private void btOpen_Click(object sender, EventArgs e) {
+            if (ofdFileOpenDialog.ShowDialog() == DialogResult.OK) {
+                try {
+                    //バイナリ形式で逆シリアル化
+                    var bf = new BinaryFormatter();
+
+                    using (FileStream fs = File.Open(ofdFileOpenDialog.FileName, FileMode.Open, FileAccess.Read)) {
+                        //逆シリアル化して読み込む
+                        listCarReports = (BindingList<CarReport>)bf.Deserialize(fs);
+                        dgvArticles.DataSource = null;
+                        dgvArticles.DataSource = listCarReports;
+                    }
+                } catch (Exception ex) {
+                    MessageBox.Show(ex.Message);
+                }
+                cbCarName.Items.Clear();//コンボボックスのアイテム消去
+                cbRecorder.Items.Clear();
+                //コンボボックスへ登録
+                foreach (var item in listCarReports.Select(p => p.CarName)) {
+                    setcbCarName(item);
+                }
+                foreach (var item in listCarReports.Select(p => p.Auther)) {
+                    setcbRecorder(item);
+                }
+            }
+            EnabledCheck();
+        }
+
+        private void 設定ToolStripMenuItem_Click(object sender, EventArgs e) {
+            //色設定ダイアログの表示
+            if (cdColorSelect.ShowDialog() == DialogResult.OK) {
+                BackColor = cdColorSelect.Color;
+            }
+        }
+
+        private void btSizeChange_Click(object sender, EventArgs e) {
+            pbCarPicture.SizeMode = (PictureBoxSizeMode)mode;
+            mode = mode < 4 ? ++mode : 0;
+        }
     }
 }
