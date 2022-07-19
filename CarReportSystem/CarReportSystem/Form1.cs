@@ -9,11 +9,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace CarReportSystem {
     public partial class Form1 : Form {
         int mode = 0;
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
+        //設定情報保存用オブジェクト
+        Settings settings = new Settings();
 
         public Form1() {
             InitializeComponent();
@@ -154,7 +158,21 @@ namespace CarReportSystem {
             dgvArticles.Refresh();//データグリッドビュー更新
         }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
+            //設定ファイルをシリアル化
+            using (var writer = XmlWriter.Create("settings.xml")) {
+                var serializer = new XmlSerializer(settings.GetType());
+                serializer.Serialize(writer, settings);
+            }
+        }
+
         private void Form1_Load(object sender, EventArgs e) {
+            ////設定ファイルを逆シリアル化して背景の色を設定
+            using (var reader = XmlReader.Create("settings.xml")) {
+                var serializer = new XmlSerializer(typeof(Settings));
+                var setting = serializer.Deserialize(reader) as Settings;
+
+            }
             EnabledCheck();
         }
 
@@ -210,6 +228,7 @@ namespace CarReportSystem {
             //色設定ダイアログの表示
             if (cdColorSelect.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColorSelect.Color;
+                settings.MainFromColor = "dddddddd"; //BackColor;//設定オブジェクトへセット
             }
         }
 
@@ -217,5 +236,7 @@ namespace CarReportSystem {
             pbCarPicture.SizeMode = (PictureBoxSizeMode)mode;
             mode = mode < 4 ? ++mode : 0;
         }
+
+        
     }
 }

@@ -358,33 +358,33 @@ namespace CarReportSystem {
             // 開くToolStripMenuItem
             // 
             this.開くToolStripMenuItem.Name = "開くToolStripMenuItem";
-            this.開くToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.開くToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.開くToolStripMenuItem.Text = "開く...";
             this.開くToolStripMenuItem.Click += new System.EventHandler(this.btOpen_Click);
             // 
             // 保存ToolStripMenuItem
             // 
             this.保存ToolStripMenuItem.Name = "保存ToolStripMenuItem";
-            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.保存ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.保存ToolStripMenuItem.Text = "保存...";
             this.保存ToolStripMenuItem.Click += new System.EventHandler(this.btSave_Click);
             // 
             // 設定ToolStripMenuItem
             // 
             this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.設定ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.設定ToolStripMenuItem.Text = "色設定...";
             this.設定ToolStripMenuItem.Click += new System.EventHandler(this.設定ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(116, 6);
             // 
             // 終了ToolStripMenuItem
             // 
             this.終了ToolStripMenuItem.Name = "終了ToolStripMenuItem";
-            this.終了ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.終了ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.終了ToolStripMenuItem.Text = "終了";
             this.終了ToolStripMenuItem.Click += new System.EventHandler(this.btExit_Click);
             // 
@@ -435,6 +435,7 @@ namespace CarReportSystem {
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "試乗レポート管理システム";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarPicture)).EndInit();
