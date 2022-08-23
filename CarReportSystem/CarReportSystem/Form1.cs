@@ -172,6 +172,8 @@ namespace CarReportSystem {
                 var serializer = new XmlSerializer(typeof(Settings));
                 var setting = serializer.Deserialize(reader) as Settings;
 
+                BackColor = Color.FromArgb(setting.MainFromColor);
+
             }
             EnabledCheck();
         }
@@ -228,7 +230,7 @@ namespace CarReportSystem {
             //色設定ダイアログの表示
             if (cdColorSelect.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColorSelect.Color;
-                settings.MainFromColor = "dddddddd"; //BackColor;//設定オブジェクトへセット
+                settings.MainFromColor = cdColorSelect.Color.ToArgb();//設定オブジェクトへセット
             }
         }
 
