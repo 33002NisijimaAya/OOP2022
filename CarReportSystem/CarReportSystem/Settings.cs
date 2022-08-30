@@ -6,9 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarReportSystem {
-    [Serializable]
-    //設定情報
     public class Settings {
+        private static Settings settings;
+
+        //コンストラクタprivateにする
+        private Settings() { }
+
+        public static Settings getInstance() {
+            if (settings == null)
+                settings = new Settings();
+
+            return settings;
+        }
         public int MainFromColor { get; set; }
     }
 }

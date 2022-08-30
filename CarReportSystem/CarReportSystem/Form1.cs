@@ -17,7 +17,7 @@ namespace CarReportSystem {
         int mode = 0;
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
         //設定情報保存用オブジェクト
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         public Form1() {
             InitializeComponent();
@@ -167,15 +167,19 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            ////設定ファイルを逆シリアル化して背景の色を設定
-            using (var reader = XmlReader.Create("settings.xml")) {
-                var serializer = new XmlSerializer(typeof(Settings));
-                var setting = serializer.Deserialize(reader) as Settings;
-
-                BackColor = Color.FromArgb(setting.MainFromColor);
+            EnabledCheck();
+            try {
+                ////設定ファイルを逆シリアル化して背景の色を設定
+                using (var reader = XmlReader.Create("settings.xml")) {
+                    var serializer = new XmlSerializer(typeof(Settings));
+                    var setting = serializer.Deserialize(reader) as Settings;
+                    BackColor = Color.FromArgb(setting.MainFromColor);
+                }
+            } catch (Exception){
 
             }
-            EnabledCheck();
+                
+            
         }
 
         private void btDelete_Click(object sender, EventArgs e) {
@@ -228,6 +232,7 @@ namespace CarReportSystem {
 
         private void 設定ToolStripMenuItem_Click(object sender, EventArgs e) {
             //色設定ダイアログの表示
+
             if (cdColorSelect.ShowDialog() == DialogResult.OK) {
                 BackColor = cdColorSelect.Color;
                 settings.MainFromColor = cdColorSelect.Color.ToArgb();//設定オブジェクトへセット
