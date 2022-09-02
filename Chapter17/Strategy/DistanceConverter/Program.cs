@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DistanceConverter.Framework;
+
 
 namespace DistanceConverter {
     class Program {
@@ -12,7 +14,7 @@ namespace DistanceConverter {
                 var from = GetConverter("変換元の単位を入力してください");
                 var to = GetConverter("変換先の単位を入力してください");
                 var distance = GetDistance(from);
-                var converter = new DistanceConverter(from,to);
+                var converter = new Framework.DistanceConverter(from,to);
                 var result = converter.Converter(100);
                 Console.WriteLine($"{distance}{from.UnitName}は、{result:0.000}{to.UnitName}です\n");
             }

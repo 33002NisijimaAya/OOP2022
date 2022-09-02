@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DistanceConverter.Framework;
 
 namespace DistanceConverter {
     public class MeterConverter : ConverterBase {
@@ -42,8 +43,8 @@ namespace DistanceConverter {
     }
 
     public class KmConverter : ConverterBase {
-        protected override double Ratio => 0.001;
-        public override string UnitName => "キロ";
+        protected override double Ratio { get { return 1000; } }
+        public override string UnitName { get { return  "キロメートル"; } }
 
         public override bool IsMyUnit(string name) {
             return name.ToLower() == "km" || name == UnitName;
@@ -51,8 +52,8 @@ namespace DistanceConverter {
     }
 
     public class MileConverter : ConverterBase {
-        protected override double Ratio => 1609.344;
-        public override string UnitName => "マイル";
+        protected override double Ratio { get { return 1609.344; } }
+        public override string UnitName { get { return "マイル"; } }
 
         public override bool IsMyUnit(string name) {
             return name.ToLower() == "mile" || name == UnitName;
