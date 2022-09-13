@@ -167,6 +167,8 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
+            // TODO: このコード行はデータを 'infosys202201DataSet.CarReportDB' テーブルに読み込みます。必要に応じて移動、または削除をしてください。
+            this.carReportDBTableAdapter.Fill(this.infosys202201DataSet.CarReportDB);
             EnabledCheck();
             try {
                 ////設定ファイルを逆シリアル化して背景の色を設定
