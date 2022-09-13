@@ -28,24 +28,25 @@ namespace AdderessBook {
 
 
         private void addressTableDataGridView_Click(object sender, EventArgs e) {
-            if (addressTableDataGridView.CurrentRow == null)
-                return;
+            
+            if (addressTableDataGridView.CurrentRow == null) { return; }
 
             //データグリッドビューの選択レコードを各テキストボックスへ設定
             tbName.Text = addressTableDataGridView.CurrentRow.Cells[1].Value.ToString();
-            tbAddress.Text = addressTableDataGridView.CurrentRow.Cells[2].Value.ToString();
-            tbTel.Text = addressTableDataGridView.CurrentRow.Cells[3].Value.ToString();
+            tbAddress.Text = addressTableDataGridView.CurrentRow.Cells[3].Value.ToString();
+            tbTel.Text = addressTableDataGridView.CurrentRow.Cells[2].Value.ToString();
             tbMail.Text = addressTableDataGridView.CurrentRow.Cells[4].Value.ToString();
             tbMemo.Text = addressTableDataGridView.CurrentRow.Cells[5].Value.ToString();
             //画像表示処理
-            if (!(addressTableDataGridView.CurrentRow.Cells[6].Value is DBNull))
+            if (!(addressTableDataGridView.CurrentRow.Cells[6].Value is DBNull)) {
                 pbImage.Image = ByteArrayToImage((byte[])addressTableDataGridView.CurrentRow.Cells[6].Value);
+            }
             else {
                 pbImage.Image = null;
             }
-
-            //if (!DBNull.Value.Equals(addressTableDataGridView.CurrentRow.Cells[6].Value))
-            //    pbImage.Image = ByteArrayToImage((byte[])addressTableDataGridView.CurrentRow.Cells[6].Value);
+            if (!DBNull.Value.Equals(addressTableDataGridView.CurrentRow.Cells[6].Value)) {
+                pbImage.Image = ByteArrayToImage((byte[])addressTableDataGridView.CurrentRow.Cells[6].Value);
+            }
 
         }
         private void btUpdate_Click(object sender, EventArgs e) {
