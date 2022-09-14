@@ -44,9 +44,9 @@ namespace AdderessBook {
             else {
                 pbImage.Image = null;
             }
-            if (!DBNull.Value.Equals(addressTableDataGridView.CurrentRow.Cells[6].Value)) {
-                pbImage.Image = ByteArrayToImage((byte[])addressTableDataGridView.CurrentRow.Cells[6].Value);
-            }
+            //if (!DBNull.Value.Equals(addressTableDataGridView.CurrentRow.Cells[6].Value)) {
+            //    pbImage.Image = ByteArrayToImage((byte[])addressTableDataGridView.CurrentRow.Cells[6].Value);
+            //}
 
         }
         private void btUpdate_Click(object sender, EventArgs e) {
