@@ -111,6 +111,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseSample", "ADONET\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdderessBook", "ADONET\AdderessBook\AdderessBook.csproj", "{CF8ACAF3-A00E-4552-94CC-23DDEAF198C0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Chapter13", "Chapter13", "{FD75FFEC-F4EF-490A-86FC-B41724DFB18D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleEntityFramework", "Chapter13\SampleEntityFramework\SampleEntityFramework.csproj", "{D38C489D-5A7D-485D-A103-42DB87227CDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -273,6 +277,10 @@ Global
 		{CF8ACAF3-A00E-4552-94CC-23DDEAF198C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF8ACAF3-A00E-4552-94CC-23DDEAF198C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF8ACAF3-A00E-4552-94CC-23DDEAF198C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D38C489D-5A7D-485D-A103-42DB87227CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D38C489D-5A7D-485D-A103-42DB87227CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D38C489D-5A7D-485D-A103-42DB87227CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D38C489D-5A7D-485D-A103-42DB87227CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -319,6 +327,7 @@ Global
 		{6AD3AC98-6B4E-4755-8D9C-F33FB3B2935A} = {34C2A499-A053-4F90-8E08-DEA0582E6751}
 		{09F10C88-D757-44C4-AFA2-15D38D10CA92} = {3573626A-E838-404A-85C5-063562B2E277}
 		{CF8ACAF3-A00E-4552-94CC-23DDEAF198C0} = {3573626A-E838-404A-85C5-063562B2E277}
+		{D38C489D-5A7D-485D-A103-42DB87227CDA} = {FD75FFEC-F4EF-490A-86FC-B41724DFB18D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {294394A0-9597-43FB-862D-69D5756BFAE6}
