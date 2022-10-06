@@ -54,6 +54,7 @@ namespace Chapter15 {
             //                .Select(group => group.OrderBy(b => b.Price).First())
             //                .OrderBy(o => o.PublishedYear);
 
+
             var selected = Library.Books
                         .Where(b => years.Contains(b.PublishedYear))
                         .Join(Library.Categories,       //結合する2番目のシーケンス
@@ -62,13 +63,16 @@ namespace Chapter15 {
                             (book, category) => new {
                                 Title = book.Title,
                                 Category = category.Name,
-                                PublishedYear = book.PublishedYear
+                                PublishedYear = book.PublishedYear,
+                                Price = book.Price
                             }
-                        );
+                        ) .ToList();
+            
             foreach (var book in selected.OrderByDescending(x=>x.PublishedYear).ThenBy(x=>x.Category)) {
-                Console.WriteLine($" {book.PublishedYear},{book.Title},{book.Category}");
-
+                Console.WriteLine($" {book.PublishedYear},{book.Title},{book.Category},{book.Price}円");
             }
+            
+            Console.WriteLine($"金額の合計：{ selected.Sum(b => b.Price)}円");
         }
     }
 }
