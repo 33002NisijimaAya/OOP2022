@@ -56,8 +56,6 @@ namespace Chapter15 {
 
             var selected = Library.Books
                         .Where(b => years.Contains(b.PublishedYear))
-                        .OrderByDescending(b=>b.PublishedYear)
-                        .ThenBy(b => b.CategoryId)
                         .Join(Library.Categories,       //結合する2番目のシーケンス
                             book => book.CategoryId,    //対象シーケンスの結合キー
                             category => category.Id,    //2番目のシーケンスの結合キー
@@ -67,7 +65,7 @@ namespace Chapter15 {
                                 PublishedYear = book.PublishedYear
                             }
                         );
-            foreach (var book in selected) {
+            foreach (var book in selected.OrderByDescending(x=>x.PublishedYear).ThenBy(x=>x.Category)) {
                 Console.WriteLine($" {book.PublishedYear},{book.Title},{book.Category}");
 
             }
