@@ -30,40 +30,58 @@ namespace Exercise1 {
         }
 
         private static void Exercise1_3() {
-            var count1= 0;
-            var count2 = 0;
-            var count3 = 0;
-            var count4 = 0;
-            foreach (var book in Library.Books) {
-                if(book.PublishedYear == 2013) {
-                    count1++;
-                }
-                if (book.PublishedYear == 2014) {
-                    count2++;
-                }
-                if (book.PublishedYear == 2015) {
-                    count3++;
-                }
-                if (book.PublishedYear == 2016) {
-                    count4++;
-                }
+            var selected = Library.Books.GroupBy(b => b.PublishedYear);
+
+            foreach (var item in selected.OrderBy(b=>b.Key)) {
+                Console.WriteLine("{0}年 {1}冊", item.Key, item.Count());
             }
-            Console.WriteLine($"2013年 {count1}冊");
-            Console.WriteLine($"2014年 {count2}冊");
-            Console.WriteLine($"2015年 {count3}冊");
-            Console.WriteLine($"2016年 {count4}冊");
         }
 
         private static void Exercise1_4() {
-            
+            var years = new List<int>();
+            var selected = Library.Books
+                        .Join(Library.Categories,       //結合する2番目のシーケンス
+                            book => book.CategoryId,    //対象シーケンスの結合キー
+                            category => category.Id,    //2番目のシーケンスの結合キー
+                            (book, category) => new {
+                                book.Title,
+                                CategoryName = category.Name,
+                                book.PublishedYear,
+                                book.Price
+                            }
+                        );
+
+            foreach (var book in selected.OrderByDescending(x => x.PublishedYear).ThenByDescending(x => x.Price)) {
+                Console.WriteLine($" {book.PublishedYear}年 {book.Price}円 {book.Title} ({book.CategoryName})");
+            }
         }
 
         private static void Exercise1_5() {
-            
+            var names = Library.Books
+                                .Where(b => b.PublishedYear == 2016)
+                                .Join(Library.Categories,
+                                      book => book.CategoryId,
+                                      Category => Category.Id,
+                                      (book, category) => category.Name)
+                                .Distinct();
+            foreach (var name in names) {
+                Console.WriteLine(name);
+            }
         }
 
         private static void Exercise1_6() {
-            
+            var groups = Library.Categories
+                         .GroupJoin(Library.Books,
+                            c => c.Id,
+                            b => b.CategoryId,
+                            (c, books) => new { Category = c.Name, Books = books });
+
+            foreach (var group in groups.OrderBy(x=>x.Category)) {
+                Console.WriteLine($"#{group.Category}");
+                foreach (var book in group.Books) {
+                    Console.WriteLine($" {book.Title}");
+                }
+            }
         }
 
         private static void Exercise1_7() {
