@@ -7,12 +7,69 @@ using System.Threading.Tasks;
 namespace Chapter15 {
     class Program {
         static void Main(string[] args) {
-            var query = Library.Books
-                .OrderBy(b => b.CategoryId)
-                .ThenByDescending(b => b.PublishedYear);
 
-            foreach (var n in query) {
-                Console.WriteLine(n);
+            var years = new List<int>();
+            int year;
+
+            Console.WriteLine("出力したい西暦を入力（終了：-1）");
+            year = int.Parse(Console.ReadLine());
+            while (year != -1) {
+                years.Add(year);
+                year = int.Parse(Console.ReadLine());
+            }
+
+            int sort;
+
+            Console.WriteLine();
+            Console.Write("昇順：1 降順：2 ：");
+            sort = int.Parse(Console.ReadLine());
+
+            IEnumerable<Book> books;
+            if (sort == 1) {
+                //昇順
+                books = Library.Books
+                    .Where(b => years.Contains(b.PublishedYear))
+                    .OrderBy(b => b.PublishedYear);
+            }
+            else {
+                //降順
+                books = Library.Books
+                    .Where(b => years.Contains(b.PublishedYear))
+                    .OrderByDescending(b => b.PublishedYear);
+            }
+
+            //var years = new int[] { 2013, 2016 };
+            foreach (var book in books) {
+                Console.WriteLine(book);
+            }
+
+            Console.WriteLine();
+            //var groups = Library.Books
+            //    .Where(b => years.Contains(b.PublishedYear))
+            //    .GroupBy(b => b.PublishedYear)
+            //    .OrderBy(g => g.Key);
+
+            //var selected = Library.Books
+            //                .GroupBy(b => b.PublishedYear)
+            //                .Select(group => group.OrderBy(b => b.Price).First())
+            //                .OrderBy(o => o.PublishedYear);
+
+            var selected = Library.Books
+                        .Where(b => years.Contains(b.PublishedYear))
+                        .OrderByDescending(b=>b.PublishedYear)
+                        .ThenBy(b => b.CategoryId)
+                        .Join(Library.Categories,       //結合する2番目のシーケンス
+                            book => book.CategoryId,    //対象シーケンスの結合キー
+                            category => category.Id,    //2番目のシーケンスの結合キー
+                            (book, category) => new {
+                                Title = book.Title,
+                                Category = category.Name,
+                                PublishedYear = book.PublishedYear
+                            }
+                        );
+            foreach (var book in selected) {
+                Console.WriteLine($" {book.PublishedYear},{book.Title},{book.Category}");
+
             }
         }
     }
