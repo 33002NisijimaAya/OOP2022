@@ -21,7 +21,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label Content="Label" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Azure"  Margin="30"/>
+            <Label Content="Color" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Azure"  Margin="30" BorderBrush="Black"  BorderThickness="1,1,1,1"/>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="30" />
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="30" />
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="30" />
