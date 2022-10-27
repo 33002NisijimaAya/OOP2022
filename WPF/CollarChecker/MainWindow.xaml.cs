@@ -1,6 +1,8 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,6 +22,8 @@ namespace CollarChecker {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
+
+            DataContext = GetColorList();
         }
 
         private void ChangeSlider() {
@@ -35,6 +39,14 @@ namespace CollarChecker {
             }
         }
 
+        /// <summary>
+        /// すべての色を取得するメソッド
+        /// </summary>
+        /// <returns></returns>
+        private MyColor[] GetColorList() {
+            return typeof(Colors).GetProperties(BindingFlags.Public | BindingFlags.Static)
+                .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
+        }
 
         private void RTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             ChangeSlider();
@@ -46,6 +58,26 @@ namespace CollarChecker {
 
         private void BTextBox_TextChanged(object sender, TextChangedEventArgs e) {
             ChangeSlider();
+        }
+
+        /// <summary>
+        /// 色と色名を保持するクラス
+        /// </summary>
+        public class MyColor {
+            public Color Color { get; set; }
+            public string Name { get; set; }
+        }
+
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e) {
+            var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
+            var color = mycolor.Color;
+
+            ColorLabel.Background = new SolidColorBrush(color);
+
+            RTextBox.Text = color.R.ToString();
+            GTextBox.Text = color.G.ToString();
+            BTextBox.Text = color.B.ToString();
         }
     }
 }
