@@ -20,8 +20,32 @@ namespace CollarChecker {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            
         }
-        
+
+        private void ChangeSlider() {
+            if(RTextBox != null && GTextBox != null && BTextBox!=null) {
+                var R = (int)Math.Floor(double.Parse(RTextBox.Text));
+                var G = (int)Math.Floor(double.Parse(GTextBox.Text));
+                var B = (int)Math.Floor(double.Parse(BTextBox.Text));
+                RTextBox.Text = R.ToString();
+                GTextBox.Text = G.ToString();
+                BTextBox.Text = B.ToString();
+                Color color = Color.FromRgb((byte)R, (byte)G, (byte)B);
+                ColorLabel.Background = new SolidColorBrush(color);
+            }
+        }
+
+
+        private void RTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            ChangeSlider();
+        }
+
+        private void GTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            ChangeSlider();
+        }
+
+        private void BTextBox_TextChanged(object sender, TextChangedEventArgs e) {
+            ChangeSlider();
+        }
     }
 }

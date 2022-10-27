@@ -21,16 +21,16 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <Label Content="Color" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Azure"  Margin="30" BorderBrush="Black"  BorderThickness="1,1,1,1"/>
+            <Label x:Name="ColorLabel" Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Background="Azure"  Margin="30" BorderBrush="Black"  BorderThickness="1,1,1,1"/>
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" FontSize="30" />
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" Grid.Row="2" Grid.Column="1" FontSize="30" />
             <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" Grid.Row="3" Grid.Column="1" FontSize="30" />
-            <Slider x:Name="RSlider"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="256"/>
-            <Slider x:Name="GSlider"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Maximum="256"/>
-            <Slider x:Name="BSlider"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Maximum="256"/>
-            <TextBox HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=RSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="1" Grid.Column="3"/>
-            <TextBox HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=GSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="2" Grid.Column="3"/>
-            <TextBox HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=BSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="3" Grid.Column="3"/>
+            <Slider x:Name="RSlider"  VerticalAlignment="Center" Grid.Row="1" Grid.Column="2" Maximum="255"/>
+            <Slider x:Name="GSlider"  VerticalAlignment="Center" Grid.Row="2" Grid.Column="2" Maximum="255"/>
+            <Slider x:Name="BSlider"  VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" Maximum="255"/>
+            <TextBox x:Name="RTextBox" HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=RSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="1" Grid.Column="3" TextChanged="RTextBox_TextChanged"/>
+            <TextBox x:Name="GTextBox" HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=GSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="2" Grid.Column="3" TextChanged="GTextBox_TextChanged" IsReadOnlyCaretVisible="True"/>
+            <TextBox x:Name="BTextBox" HorizontalAlignment="Center" Height="16" TextWrapping="Wrap" Text="{Binding ElementName=BSlider,Path=Value,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Width="41" Grid.Row="3" Grid.Column="3" TextChanged="BTextBox_TextChanged"/>
         </Grid>
 
     </StackPanel>
