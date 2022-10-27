@@ -20,20 +20,19 @@ namespace CollarChecker {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        List<MyColor> colorList = new List<MyColor>();
         public MainWindow() {
             InitializeComponent();
-
+            
             DataContext = GetColorList();
         }
 
         private void ChangeSlider() {
-            if(RTextBox != null && GTextBox != null && BTextBox!=null) {
-                var R = (int)Math.Floor(double.Parse(RTextBox.Text));
-                var G = (int)Math.Floor(double.Parse(GTextBox.Text));
-                var B = (int)Math.Floor(double.Parse(BTextBox.Text));
-                RTextBox.Text = R.ToString();
-                GTextBox.Text = G.ToString();
-                BTextBox.Text = B.ToString();
+            if (RTextBox != null && GTextBox != null && BTextBox != null) {
+                var R = double.Parse(RTextBox.Text);
+                var G = double.Parse(GTextBox.Text);
+                var B = double.Parse(BTextBox.Text);
+
                 Color color = Color.FromRgb((byte)R, (byte)G, (byte)B);
                 ColorLabel.Background = new SolidColorBrush(color);
             }
@@ -69,7 +68,7 @@ namespace CollarChecker {
         }
 
 
-        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e) {
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             var mycolor = (MyColor)((ComboBox)sender).SelectedItem;
             var color = mycolor.Color;
 
@@ -78,6 +77,11 @@ namespace CollarChecker {
             RTextBox.Text = color.R.ToString();
             GTextBox.Text = color.G.ToString();
             BTextBox.Text = color.B.ToString();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e) {
+            //colorList.Add("R:{0} G;{1} B:{2}",);
+            
         }
     }
 }
