@@ -27,14 +27,14 @@
             <TextBlock TextWrapping="Wrap" Text="R" Grid.Row="1" Grid.Column="1" FontSize="30" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.163,0.52" />
             <TextBlock TextWrapping="Wrap" Text="G" Grid.Row="2" Grid.Column="1" FontSize="30" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBlock TextWrapping="Wrap" Text="B" Grid.Row="3" Grid.Column="1" FontSize="30" Width="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            <Slider x:Name="RSlider" Grid.Row="1" Grid.Column="2" Maximum="255" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
-            <Slider x:Name="GSlider" Grid.Row="2" Grid.Column="2" Maximum="255" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
-            <Slider x:Name="BSlider" Grid.Row="3" Grid.Column="2" Maximum="255" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
+            <Slider x:Name="RSlider" Grid.Row="1" Grid.Column="2" Maximum="255"  HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
+            <Slider x:Name="GSlider" Grid.Row="2" Grid.Column="2" Maximum="255"  HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
+            <Slider x:Name="BSlider" Grid.Row="3" Grid.Column="2" Maximum="255"  HorizontalAlignment="Left" Width="120" TickPlacement="TopLeft" Foreground="Black" TickFrequency="50" Height="18" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="10,16"/>
             <TextBox x:Name="RTextBox" TextWrapping="Wrap" Text="{Binding ElementName=RSlider,Path=Value,StringFormat={}{0:N0}}" Grid.Row="1" Grid.Column="3" TextChanged="RTextBox_TextChanged" Margin="10,17,5,17"/>
             <TextBox x:Name="GTextBox" TextWrapping="Wrap" Text="{Binding ElementName=GSlider,Path=Value,StringFormat={}{0:N0}}" Grid.Row="2" Grid.Column="3" TextChanged="GTextBox_TextChanged" Margin="10,17,5,17"/>
             <TextBox x:Name="BTextBox" TextWrapping="Wrap" Text="{Binding ElementName=BSlider,Path=Value,StringFormat={}{0:N0}}" Grid.Row="3" Grid.Column="3" TextChanged="BTextBox_TextChanged" Margin="10,17,5,17"/>
-            <Button Grid.Row="0" Grid.Column="4" Content="STOCK" FontSize="20" Margin="10,5" Click="Button_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" Grid.RowSpan="4" Grid.Column="4" Height="Auto" Margin="10,0,13,5"/>
+            <Button x:Name="StockButton" Grid.Row="0" Grid.Column="4" Content="STOCK"  Margin="10,5,86,5" Click="Button_Click"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Grid.RowSpan="4" Grid.Column="4" Height="184" Margin="10,0,13,0" VerticalAlignment="Top" SelectionChanged="stockList_SelectionChanged"/>
             <ComboBox x:Name="ComboBox" ItemsSource="{Binding}" SelectedValue="{Binding Color}" Margin="10,0,10,16" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="4" SelectionChanged="ComboBox_SelectionChanged" Height="24" VerticalAlignment="Bottom">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -49,6 +49,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
+            <Button x:Name="DeleteButton" Content="DELETE" Grid.Column="4" HorizontalAlignment="Left" Margin="85,5,0,0" VerticalAlignment="Top" Width="55" Height="40" Click="DeleteButton_Click"/>
         </Grid>
     </StackPanel>
 </Window>

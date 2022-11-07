@@ -21,6 +21,7 @@ namespace CollarChecker {
     /// </summary>
     public partial class MainWindow : Window {
         List<MyColor> colorList = new List<MyColor>();
+
         public MainWindow() {
             InitializeComponent();
             
@@ -74,14 +75,40 @@ namespace CollarChecker {
 
             ColorLabel.Background = new SolidColorBrush(color);
 
-            RTextBox.Text = color.R.ToString();
-            GTextBox.Text = color.G.ToString();
-            BTextBox.Text = color.B.ToString();
+            RSlider.Value = color.R;
+            GSlider.Value = color.G;
+            BSlider.Value = color.B;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            //colorList.Add("R:{0} G;{1} B:{2}",);
-            
+            MyColor stColor = new MyColor();
+
+            var r = byte.Parse(RTextBox.Text);
+            var g = byte.Parse(GTextBox.Text);
+            var b = byte.Parse(BTextBox.Text);
+            stColor.Color = Color.FromRgb(r, g, b);
+
+            var colorName = ((IEnumerable<MyColor>)DataContext)
+                                .Where(c => c.Color.R == stColor.Color.R &&
+                                          c.Color.G == stColor.Color.G &&
+                                          c.Color.B == stColor.Color.B).FirstOrDefault();
+
+            stockList.Items.Insert(0,colorName?.Name ?? "R:" + RTextBox.Text + "G:" + GTextBox.Text + "B:" + BTextBox.Text );
+            colorList.Insert(0,stColor);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            stockList.Items.Remove(stockList.SelectedItem);
+        }
+
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if(stockList.SelectedItems.Count == 0) {
+                return;
+            };
+            var index = stockList.SelectedIndex;
+            RSlider.Value = colorList[index].Color.R;
+            GSlider.Value = colorList[index].Color.G;
+            BSlider.Value = colorList[index].Color.B;
         }
     }
 }
