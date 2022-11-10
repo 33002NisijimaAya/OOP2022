@@ -28,6 +28,14 @@ namespace CollarChecker {
             DataContext = GetColorList();
         }
 
+        private void setColor() {
+            var r = byte.Parse(RTextBox.Text);
+            var g = byte.Parse(GTextBox.Text);
+            var b = byte.Parse(BTextBox.Text);
+            Color color = Color.FromRgb(r, g, b);
+            ColorLabel.Background = new SolidColorBrush(color);
+
+        }
         private void ChangeSlider() {
             if (RTextBox != null && GTextBox != null && BTextBox != null) {
                 var R = double.Parse(RTextBox.Text);
@@ -75,14 +83,14 @@ namespace CollarChecker {
 
             ColorLabel.Background = new SolidColorBrush(color);
 
-            RSlider.Value = color.R;
-            GSlider.Value = color.G;
-            BSlider.Value = color.B;
+            RSlider.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.R;
+            GSlider.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.G;
+            BSlider.Value = ((MyColor)((ComboBox)sender).SelectedItem).Color.B;
+            setColor();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
             MyColor stColor = new MyColor();
-
             var r = byte.Parse(RTextBox.Text);
             var g = byte.Parse(GTextBox.Text);
             var b = byte.Parse(BTextBox.Text);
@@ -98,17 +106,18 @@ namespace CollarChecker {
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
+            if (stockList.SelectedItems.Count == 0)
+                return;
             stockList.Items.Remove(stockList.SelectedItem);
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if(stockList.SelectedItems.Count == 0) {
+            if (stockList.SelectedItems.Count == 0)
                 return;
-            };
-            var index = stockList.SelectedIndex;
-            RSlider.Value = colorList[index].Color.R;
-            GSlider.Value = colorList[index].Color.G;
-            BSlider.Value = colorList[index].Color.B;
+            RSlider.Value = colorList[stockList.SelectedIndex].Color.R;
+            GSlider.Value = colorList[stockList.SelectedIndex].Color.G;
+            BSlider.Value = colorList[stockList.SelectedIndex].Color.B;
+            setColor();
         }
     }
 }
