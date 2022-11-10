@@ -105,14 +105,17 @@ namespace CollarChecker {
             colorList.Insert(0,stColor);
         }
 
+        //Deleteボタン
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
-            if (stockList.SelectedItems.Count == 0)
+            var delIndex = stockList.SelectedIndex;
+            if (delIndex == -1)
                 return;
-            stockList.Items.Remove(stockList.SelectedItem);
+            stockList.Items.RemoveAt(delIndex);
+            colorList.RemoveAt(delIndex);
         }
 
         private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (stockList.SelectedItems.Count == 0)
+            if (stockList.SelectedIndex == -1)
                 return;
             RSlider.Value = colorList[stockList.SelectedIndex].Color.R;
             GSlider.Value = colorList[stockList.SelectedIndex].Color.G;
