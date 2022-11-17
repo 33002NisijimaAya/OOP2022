@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace WeatherApp {
 
+    public enum WeatherPlace {
+        日本周辺カラー,
+        日本周辺白黒,
+        アジア太平洋域カラー,
+        アジア太平洋域白黒,
+    }
+
     public class Rootobject {
         public string publishingOffice { get; set; }
         public DateTime reportDatetime { get; set; }
@@ -79,6 +86,38 @@ namespace WeatherApp {
     public class Area5 {
         public string name { get; set; }
         public string code { get; set; }
+    }
+
+
+    public class Rootobject2 {
+        public Near near { get; set; }
+        public Near_Monochrome near_monochrome { get; set; }
+        public Asia asia { get; set; }
+        public Asia_Monochrome asia_monochrome { get; set; }
+    }
+
+    public class Near {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Near_Monochrome {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Asia {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
+    }
+
+    public class Asia_Monochrome {
+        public string[] now { get; set; }
+        public string[] ft24 { get; set; }
+        public string[] ft48 { get; set; }
     }
 
 }
