@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -11,16 +12,18 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace WeatherApp {
-    public partial class Form2 : Form {
+    public partial class tbAfterTomorrow : Form {
+        WebClient wc;
+
         List<string> areaname = new List<string>{
             "宗谷地方", "上川・留萌地方","網走・北見・紋別地方","釧路・根室地方","胆振・日高地方","石狩・空知・後志地方", "渡島・檜山地方",
             "青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","山梨県","長野県",
             "岐阜県","静岡県","愛知県","三重県","新潟県","富山県","石川県","福井県","滋賀県","京都府","大阪府","兵庫県","奈良県","	和歌山県","鳥取県","島根県","岡山県",
-            "広島県","徳島県","香川県","愛媛県","高知県","山口県","福岡県","佐賀県","長崎県","	熊本県","大分県","宮崎県","奄美地方","鹿児島県（奄美地方除く）","沖縄本島地方","大東島地方","宮古島地方","八重山地方",
+            "広島県","徳島県","香川県","愛媛県","高知県","山口県","福岡県","佐賀県","長崎県","	熊本県","大分県","宮崎県","鹿児島県（奄美地方除く）","沖縄本島地方","大東島地方","宮古島地方","八重山地方",
         };
 
 
-        public Form2() {
+        public tbAfterTomorrow() {
             InitializeComponent();
         }
 
@@ -31,7 +34,7 @@ namespace WeatherApp {
                 "020000","030000","040000","050000","060000","070000","080000","090000","100000","110000","120000","130000",
                 "140000","190000","200000","210000","220000","230000","240000","150000","160000","170000","180000","250000",
                 "260000","270000","280000","290000","300000","310000","320000","330000","340000","360000","370000","380000",
-                "390000","350000","400000","410000","420000","430000","440000","450000","460040","460100","471000",
+                "390000","350000","400000","410000","420000","430000","440000","450000","460100","471000",
                 "472000","473000","474000"
             };
 
@@ -39,8 +42,8 @@ namespace WeatherApp {
                 Encoding = Encoding.UTF8
             };
 
-            
-            
+
+
 
             string weatherforecast = string.Format("https://www.jma.go.jp/bosai/forecast/data/overview_forecast/{0}.json", areacode[index]);
             string weatherweek = string.Format("https://www.jma.go.jp/bosai/forecast/data/forecast/{0}.json", areacode[index]);
@@ -52,28 +55,86 @@ namespace WeatherApp {
             var json2 = JsonConvert.DeserializeObject<Class1[]>(dString2);
             var dt = json1.reportDatetime;
 
-            var todayweathercode = json2[0].timeSeries[0].areas[0].weatherCodes[0];
-            var tomorrowweathercode = json2[0].timeSeries[0].areas[0].weatherCodes[1];
+            var todayweathercode = json2[1].timeSeries[0].areas[0].weatherCodes[0];
+            var tomorrowweathercode = json2[1].timeSeries[0].areas[0].weatherCodes[1];
+            var aftertomorrowweathercode = json2[1].timeSeries[0].areas[0].weatherCodes[2];
+            var tomorrowweathercode2 = json2[1].timeSeries[0].areas[0].weatherCodes[4];
+            var tomorrowweathercode3 = json2[1].timeSeries[0].areas[0].weatherCodes[5];
+            var tomorrowweathercode4 = json2[1].timeSeries[0].areas[0].weatherCodes[6];
+            var tomorrowweathercode5 = json2[1].timeSeries[0].areas[0].weatherCodes[5];
 
-            pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/"+ todayweathercode + ".png";
+            pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + todayweathercode + ".png";
             pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode + ".png";
+            pbAfterTomorrow.ImageLocation= "https://www.jma.go.jp/bosai/forecast/img/" + aftertomorrowweathercode + ".png";
+            pbtomorrow2.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode2 + ".png";
+            pbtomorrow3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode3 + ".png";
+            pbtomorrow4.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode4 + ".png";
 
             tbWeatherInfo.Text = json1.text;
             tbArea.Text = string.Format("{0}の天気概要", json1.targetArea);
             tbPublisher.Text = json1.publishingOffice;
             tbTime.Text = dt.ToString("yyyy/MM/dd HH:mm:ss");
+
             tbToday.Text = json2[0].timeSeries[0].areas[0].weathers[0];
             tbTomorrow.Text = json2[0].timeSeries[0].areas[0].weathers[1];
-            tbmaxtemp.Text = json2[1].tempAverage.areas[0].max;
-            tbmintemp.Text = json2[1].tempAverage.areas[0].min;
+            tbAfterTomorrow1.Text = json2[0].timeSeries[0].areas[0].weathers[2];
             
 
+            tbtodaymaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[1];
+            tbtomorrowmaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[2];
+            tbAfterTomorrowmax.Text = json2[1].timeSeries[1].areas[0].tempsMax[3];
+            tbtomorrow2max.Text = json2[1].timeSeries[1].areas[0].tempsMax[4];
+            tbtomorrow3max.Text = json2[1].timeSeries[1].areas[0].tempsMax[5];
+            tbtomorrow4max.Text = json2[1].timeSeries[1].areas[0].tempsMax[6];
+
+            tbTodaymintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[1];
+            tbtomorrowmintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[2];
+            tbAfterTomorrowmin.Text = json2[1].timeSeries[1].areas[0].tempsMin[3];
+            tbtomorrow2min.Text = json2[1].timeSeries[1].areas[0].tempsMin[4];
+            tbtomorrow3min.Text = json2[1].timeSeries[1].areas[0].tempsMin[5];
+            tbtomorrow4min.Text = json2[1].timeSeries[1].areas[0].tempsMin[6];
+
+            lbTodayDate.Text = json2[1].timeSeries[0].timeDefines[0].ToString("dd(ddd)");
+            lbTomorrowDate.Text = json2[1].timeSeries[0].timeDefines[1].ToString("d(ddd)");
+            lbAfterTomorrowDate.Text= json2[1].timeSeries[0].timeDefines[2].ToString("dd(ddd)");
+            lbTomorrow2.Text = json2[1].timeSeries[0].timeDefines[3].ToString("dd(ddd)");
+            lbTomorrow3.Text = json2[1].timeSeries[0].timeDefines[4].ToString("dd(ddd)");
+            lbTomorrow4.Text = json2[1].timeSeries[0].timeDefines[5].ToString("dd(ddd)");
+
+            if (tbToday.Text.Contains("晴れ")) {
+                wc = new WebClient() {
+                    Encoding = Encoding.UTF8
+                };
+                var url = "https://prtimes.jp/i/4198/49/origin/d4198-49-701953-0.jpg";
+                GetBackImage(wc, url);
+            }
+            else if (tbToday.Text.Contains("雨")) {
+                wc = new WebClient() {
+                    Encoding = Encoding.UTF8
+                };
+                var url = "https://up.gc-img.net/post_img/2017/04/OxyM9k9fGjwc8EO_UbvLi_47.jpeg";
+                GetBackImage(wc, url);
+            }
+        }
+
+        private void GetBackImage(WebClient wc, string url) {
+            Stream stream = wc.OpenRead(url);
+            Bitmap bitmap = new Bitmap(stream);
+            stream.Close();
+            BackgroundImage = bitmap;
         }
 
         private void Form2_Load(object sender, EventArgs e) {
             cbArea.Items.AddRange(areaname.ToArray());
+
+
+            wc = new WebClient() {
+                Encoding = Encoding.UTF8
+            };
+
+            var url = "https://www.nsozai.jp/photos/2017/08/19/img/DSC_7528_g.JPG";
+            GetBackImage(wc, url);
         }
 
-       
     }
 }

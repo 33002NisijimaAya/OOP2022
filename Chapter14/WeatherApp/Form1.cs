@@ -28,7 +28,7 @@ namespace WeatherApp {
         }
 
         private void btWeatherforecast_Click_1(object sender, EventArgs e) {
-            Form2 form2 = new Form2();
+            tbAfterTomorrow form2 = new tbAfterTomorrow();
             form2.Show();
 
         }
@@ -39,17 +39,17 @@ namespace WeatherApp {
             };
 
 
-            Stream stream = wc.OpenRead("https://1.bp.blogspot.com/-kcV5lUNVWjk/U9y_l53j6tI/AAAAAAAAjfc/ksZGpirKWfM/s800/tenki_mark01_hare.png");
+            Stream stream = wc.OpenRead("https://www.nsozai.jp/photos/2017/08/19/img/DSC_7528_g.JPG");
             Bitmap bitmap = new Bitmap(stream);
             stream.Close();
             BackgroundImage = bitmap;
 
-            Stream stream2 = wc.OpenRead("http://img-o.starrypages.net/img/nureyon/cloud-2.png");
+            Stream stream2 = wc.OpenRead("https://storage.tenki.jp/storage/static-images/forecaster_diary/image/2/25/253/2535/main/20181030112231/large.png");
             Bitmap bitmap2 = new Bitmap(stream2);
             stream2.Close();
             btWeatherforecast.BackgroundImage = bitmap2;
 
-            Stream stream3 = wc.OpenRead("https://www.sozailab.jp/db_img/sozai/26655/0d07bea5867193358904065b663b4f0e.png");
+            Stream stream3 = wc.OpenRead("https://shonanwave.net/wp-content/uploads/2019/06/WM_ChartA_20190615-030000.jpg");
             Bitmap bitmap3 = new Bitmap(stream3);
             stream3.Close();
             btWeatherImage.BackgroundImage = bitmap3;
