@@ -14,9 +14,8 @@ using Newtonsoft.Json;
 namespace WeatherApp {
     public partial class Form1 : Form {
         WebClient wc;
-        Rootobject2 json3;
 
-        
+
         public Form1() {
             InitializeComponent();
 
@@ -33,26 +32,38 @@ namespace WeatherApp {
 
         }
 
+        
         private void Form1_Load(object sender, EventArgs e) {
-            wc = new WebClient() {
-                Encoding = Encoding.UTF8
-            };
+            try {
+                this.FormBorderStyle = FormBorderStyle.None;
 
+                wc = new WebClient() {
+                    Encoding = Encoding.UTF8
+                };
 
-            Stream stream = wc.OpenRead("https://www.nsozai.jp/photos/2017/08/19/img/DSC_7528_g.JPG");
+                var url2 = "https://smtgvs.weathernews.jp/s/topics/img/202008/202008300005_top_img_A.png?1598735430";
+                var bitmap2 = GetImage(url2);
+                pbWeatherforecast.BackgroundImage = bitmap2;
+
+                var url3 = "https://shonanwave.net/wp-content/uploads/2019/06/WM_ChartA_20190615-030000.jpg";
+                var bitmap3 = GetImage(url3);
+                pbWeatherImage.BackgroundImage = bitmap3;
+            } catch (WebException ex) {
+                MessageBox.Show("erro:" + ex);
+                Application.Exit();
+            }
+           
+        }
+
+        private Bitmap GetImage(string url) {
+            Stream stream = wc.OpenRead(url);
             Bitmap bitmap = new Bitmap(stream);
             stream.Close();
-            BackgroundImage = bitmap;
+            return bitmap;
+        }
 
-            Stream stream2 = wc.OpenRead("https://storage.tenki.jp/storage/static-images/forecaster_diary/image/2/25/253/2535/main/20181030112231/large.png");
-            Bitmap bitmap2 = new Bitmap(stream2);
-            stream2.Close();
-            btWeatherforecast.BackgroundImage = bitmap2;
-
-            Stream stream3 = wc.OpenRead("https://shonanwave.net/wp-content/uploads/2019/06/WM_ChartA_20190615-030000.jpg");
-            Bitmap bitmap3 = new Bitmap(stream3);
-            stream3.Close();
-            btWeatherImage.BackgroundImage = bitmap3;
+        private void button1_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }

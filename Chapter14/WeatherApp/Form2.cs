@@ -61,7 +61,6 @@ namespace WeatherApp {
             var tomorrowweathercode2 = json2[1].timeSeries[0].areas[0].weatherCodes[4];
             var tomorrowweathercode3 = json2[1].timeSeries[0].areas[0].weatherCodes[5];
             var tomorrowweathercode4 = json2[1].timeSeries[0].areas[0].weatherCodes[6];
-            var tomorrowweathercode5 = json2[1].timeSeries[0].areas[0].weatherCodes[5];
 
             pbToday.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + todayweathercode + ".png";
             pbTomorrow.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode + ".png";
@@ -70,29 +69,27 @@ namespace WeatherApp {
             pbtomorrow3.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode3 + ".png";
             pbtomorrow4.ImageLocation = "https://www.jma.go.jp/bosai/forecast/img/" + tomorrowweathercode4 + ".png";
 
-            tbWeatherInfo.Text = json1.text;
-            tbArea.Text = string.Format("{0}の天気概要", json1.targetArea);
-            tbPublisher.Text = json1.publishingOffice;
-            tbTime.Text = dt.ToString("yyyy/MM/dd HH:mm:ss");
+            lbWeatherInfo.Text = json1.text;
+            lbPublisher.Text = json1.publishingOffice;
+            lbTime.Text = dt.ToString("yyyy/MM/dd HH:mm:ss");
 
-            tbToday.Text = json2[0].timeSeries[0].areas[0].weathers[0];
-            tbTomorrow.Text = json2[0].timeSeries[0].areas[0].weathers[1];
-            tbAfterTomorrow1.Text = json2[0].timeSeries[0].areas[0].weathers[2];
+            lbToday.Text = json2[0].timeSeries[0].areas[0].weathers[0];
+            lbTomorrow.Text = json2[0].timeSeries[0].areas[0].weathers[1];
             
 
-            tbtodaymaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[1];
-            tbtomorrowmaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[2];
-            tbAfterTomorrowmax.Text = json2[1].timeSeries[1].areas[0].tempsMax[3];
-            tbtomorrow2max.Text = json2[1].timeSeries[1].areas[0].tempsMax[4];
-            tbtomorrow3max.Text = json2[1].timeSeries[1].areas[0].tempsMax[5];
-            tbtomorrow4max.Text = json2[1].timeSeries[1].areas[0].tempsMax[6];
+            lbtodaymaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[1];
+            lbtomorrowmaxtemp.Text = json2[1].timeSeries[1].areas[0].tempsMax[2];
+            lbAfterTomorrowmax.Text = json2[1].timeSeries[1].areas[0].tempsMax[3];
+            lbtomorrow2max.Text = json2[1].timeSeries[1].areas[0].tempsMax[4];
+            lbtomorrow3max.Text = json2[1].timeSeries[1].areas[0].tempsMax[5];
+            lbtomorrow4max.Text = json2[1].timeSeries[1].areas[0].tempsMax[6];
 
-            tbTodaymintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[1];
-            tbtomorrowmintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[2];
-            tbAfterTomorrowmin.Text = json2[1].timeSeries[1].areas[0].tempsMin[3];
-            tbtomorrow2min.Text = json2[1].timeSeries[1].areas[0].tempsMin[4];
-            tbtomorrow3min.Text = json2[1].timeSeries[1].areas[0].tempsMin[5];
-            tbtomorrow4min.Text = json2[1].timeSeries[1].areas[0].tempsMin[6];
+            lbTodaymintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[1];
+            lbtomorrowmintemp.Text = json2[1].timeSeries[1].areas[0].tempsMin[2];
+            lbAfterTomorrowmin.Text = json2[1].timeSeries[1].areas[0].tempsMin[3];
+            lbtomorrow2min.Text = json2[1].timeSeries[1].areas[0].tempsMin[4];
+            lbtomorrow3min.Text = json2[1].timeSeries[1].areas[0].tempsMin[5];
+            lbtomorrow4min.Text = json2[1].timeSeries[1].areas[0].tempsMin[6];
 
             lbTodayDate.Text = json2[1].timeSeries[0].timeDefines[0].ToString("dd(ddd)");
             lbTomorrowDate.Text = json2[1].timeSeries[0].timeDefines[1].ToString("d(ddd)");
@@ -101,20 +98,7 @@ namespace WeatherApp {
             lbTomorrow3.Text = json2[1].timeSeries[0].timeDefines[4].ToString("dd(ddd)");
             lbTomorrow4.Text = json2[1].timeSeries[0].timeDefines[5].ToString("dd(ddd)");
 
-            if (tbToday.Text.Contains("晴れ")) {
-                wc = new WebClient() {
-                    Encoding = Encoding.UTF8
-                };
-                var url = "https://prtimes.jp/i/4198/49/origin/d4198-49-701953-0.jpg";
-                GetBackImage(wc, url);
-            }
-            else if (tbToday.Text.Contains("雨")) {
-                wc = new WebClient() {
-                    Encoding = Encoding.UTF8
-                };
-                var url = "https://up.gc-img.net/post_img/2017/04/OxyM9k9fGjwc8EO_UbvLi_47.jpeg";
-                GetBackImage(wc, url);
-            }
+            
         }
 
         private void GetBackImage(WebClient wc, string url) {
@@ -126,15 +110,30 @@ namespace WeatherApp {
 
         private void Form2_Load(object sender, EventArgs e) {
             cbArea.Items.AddRange(areaname.ToArray());
-
-
+            this.FormBorderStyle = FormBorderStyle.None;
+            cbArea.SelectedIndex = 15;
+            btWeatherGet_Click(sender, e);
             wc = new WebClient() {
                 Encoding = Encoding.UTF8
             };
 
-            var url = "https://www.nsozai.jp/photos/2017/08/19/img/DSC_7528_g.JPG";
-            GetBackImage(wc, url);
+            
+
+            var panelImage = "https://illustcut.com/box/zukei/fukidashi1/fukidashi02_01.png";
+            Stream stream = wc.OpenRead(panelImage);
+            Bitmap bitmap = new Bitmap(stream);
+            stream.Close();
+            plGaiyo.BackgroundImage = bitmap;
+
+            var pbhumanImage = "http://www.putiya.com/robo/robo_9_r2_c16.png";
+            Stream stream2 = wc.OpenRead(pbhumanImage);
+            Bitmap bitmap2 = new Bitmap(stream2);
+            stream2.Close();
+            plhuman.BackgroundImage = bitmap2;
         }
 
+        private void button1_Click(object sender, EventArgs e) {
+            this.Close();
+        }
     }
 }

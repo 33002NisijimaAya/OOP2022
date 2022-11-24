@@ -12,7 +12,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 
 namespace WeatherApp {
-    
+
 
     public partial class Form3 : Form {
         WebClient wc;
@@ -44,7 +44,7 @@ namespace WeatherApp {
             return selectedKindPlace;
         }
 
-        
+
 
         private void GetWeatherImage() {
             GetJson(out wc, out json3);
@@ -79,10 +79,7 @@ namespace WeatherApp {
             pbWeather.Image = bitmap;
         }
 
-        private void EnabledCheck() {
-
-        }
-
+        
 
         private static void GetJson(out WebClient wc, out Rootobject2 json3) {
             wc = new WebClient() {
@@ -93,13 +90,10 @@ namespace WeatherApp {
             json3 = JsonConvert.DeserializeObject<Rootobject2>(dString3);
         }
 
-        
 
-        private void WeatherImage_Load(object sender, EventArgs e) {
 
-        }
+       
 
-        
 
         private void tbWeatherShow_Click_1(object sender, EventArgs e) {
             GetWeatherImage();
@@ -110,7 +104,12 @@ namespace WeatherApp {
             GetJson(out wc, out json3);
 
             if (rbNear.Checked) {
-                if (Nearcount > 0) {
+                if (Nearcount == 23) {
+                    Nearcount--;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (Nearcount > 0) {
                     Nearcount--;
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near.now[Nearcount]);
                     inputWeather(wc, selectjson);
@@ -120,7 +119,12 @@ namespace WeatherApp {
                 }
             }
             if (rbNearMonochrome.Checked) {
-                if (NMonochrometcount > 0) {
+                if (NMonochrometcount == 23) {
+                    NMonochrometcount--;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near_monochrome.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (NMonochrometcount > 0) {
                     NMonochrometcount--;
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near_monochrome.now[NMonochrometcount]);
                     inputWeather(wc, selectjson);
@@ -131,7 +135,12 @@ namespace WeatherApp {
             }
 
             if (rbAsia.Checked) {
-                if (Asiacount > 0) {
+                if (Asiacount == 14) {
+                    Asiacount--;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (Asiacount > 0) {
                     Asiacount--;
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia.now[Asiacount]);
                     inputWeather(wc, selectjson);
@@ -142,7 +151,11 @@ namespace WeatherApp {
             }
 
             if (rbAsiaMonochrome.Checked) {
-                if (AMonochrometcount > 0) {
+                if (AMonochrometcount == 14) {
+                    AMonochrometcount--;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia_monochrome.ft24);
+                    inputWeather(wc, selectjson);
+                }else if (AMonochrometcount > 0) {
                     AMonochrometcount--;
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia_monochrome.now[AMonochrometcount]);
                     inputWeather(wc, selectjson);
@@ -164,6 +177,16 @@ namespace WeatherApp {
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near.now[Nearcount]);
                     inputWeather(wc, selectjson);
                 }
+                else if (Nearcount == 21) {
+                    Nearcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (Nearcount == 22) {
+                    Nearcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near.ft48);
+                    inputWeather(wc, selectjson);
+                }
                 else {
                     return;
                 }
@@ -172,6 +195,16 @@ namespace WeatherApp {
                 if (NMonochrometcount <= 20) {
                     NMonochrometcount++;
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near_monochrome.now[NMonochrometcount]);
+                    inputWeather(wc, selectjson);
+                }
+                else if (NMonochrometcount == 21) {
+                    NMonochrometcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near_monochrome.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (NMonochrometcount == 22) {
+                    NMonochrometcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.near_monochrome.ft48);
                     inputWeather(wc, selectjson);
                 }
                 else {
@@ -185,6 +218,16 @@ namespace WeatherApp {
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia.now[Asiacount]);
                     inputWeather(wc, selectjson);
                 }
+                else if (Asiacount == 12) {
+                    Asiacount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (Asiacount == 13) {
+                    Asiacount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia.ft48);
+                    inputWeather(wc, selectjson);
+                }
                 else {
                     return;
                 }
@@ -196,11 +239,42 @@ namespace WeatherApp {
                     var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia_monochrome.now[AMonochrometcount]);
                     inputWeather(wc, selectjson);
                 }
+                else if (AMonochrometcount == 12) {
+                    AMonochrometcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia_monochrome.ft24);
+                    inputWeather(wc, selectjson);
+                }
+                else if (AMonochrometcount == 13) {
+                    AMonochrometcount++;
+                    var selectjson = string.Format("https://www.jma.go.jp/bosai/weather_map/data/png/{0}", json3.asia_monochrome.ft48);
+                    inputWeather(wc, selectjson);
+                }
                 else {
                     return;
                 }
             }
 
+        }
+
+        private void btReal_Click(object sender, EventArgs e) {
+            CountReset();
+
+            GetWeatherImage();
+        }
+
+        private void CountReset() {
+            Nearcount = 21;
+            NMonochrometcount = 21;
+            Asiacount = 12;
+            AMonochrometcount = 12;
+        }
+
+        private void Form3_Load(object sender, EventArgs e) {
+            this.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        private void button1_Click(object sender, EventArgs e) {
+            this.Close();
         }
     }
 }
