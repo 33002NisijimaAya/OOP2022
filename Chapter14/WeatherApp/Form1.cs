@@ -22,14 +22,16 @@ namespace WeatherApp {
         }
 
         private void btWeatherImage_Click(object sender, EventArgs e) {
+            this.Hide();
             Form3 form3 = new Form3();
             form3.Show();
         }
 
         private void btWeatherforecast_Click_1(object sender, EventArgs e) {
+            this.Hide();
             tbAfterTomorrow form2 = new tbAfterTomorrow();
             form2.Show();
-
+            
         }
 
         

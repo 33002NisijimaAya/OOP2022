@@ -92,7 +92,7 @@ namespace WeatherApp {
             lbtomorrow4min.Text = json2[1].timeSeries[1].areas[0].tempsMin[6];
 
             lbTodayDate.Text = json2[1].timeSeries[0].timeDefines[0].ToString("dd(ddd)");
-            lbTomorrowDate.Text = json2[1].timeSeries[0].timeDefines[1].ToString("d(ddd)");
+            lbTomorrowDate.Text = json2[1].timeSeries[0].timeDefines[1].ToString("dd(ddd)");
             lbAfterTomorrowDate.Text= json2[1].timeSeries[0].timeDefines[2].ToString("dd(ddd)");
             lbTomorrow2.Text = json2[1].timeSeries[0].timeDefines[3].ToString("dd(ddd)");
             lbTomorrow3.Text = json2[1].timeSeries[0].timeDefines[4].ToString("dd(ddd)");
@@ -133,6 +133,8 @@ namespace WeatherApp {
         }
 
         private void button1_Click(object sender, EventArgs e) {
+            Form1 form1 = new Form1();
+            form1.Show();
             this.Close();
         }
     }
